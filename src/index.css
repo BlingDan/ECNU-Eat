@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-ecnu-red/5 to-ecnu-blue/5 min-h-screen;
+    /* 允许触摸滚动，禁用双击缩放以优化移动端体验 */
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ecnu-red hover:bg-ecnu-red/90 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-ecnu-blue font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-200 active:scale-95 border border-gray-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-xl p-6 border border-gray-100;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-ecnu-red focus:ring-2 focus:ring-ecnu-red/20 outline-none transition-all;
+  }
+
+  /* 结果弹入动画 */
+  .animate-result-bounce {
+    animation: resultBounce 1.5s ease-out;
+  }
+
+  @keyframes resultBounce {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.05) translateY(-10px);
+    }
+
+    65% {
+      transform: scale(0.95) translateY(5px);
+    }
+
+    80% {
+      transform: scale(1.02) translateY(-2px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* 卡包开启动画 */
+  .animate-pack-open {
+    animation: packOpen 1.2s ease-out forwards;
+  }
+
+  @keyframes packOpen {
+    0% {
+      transform: scale(1) rotateY(0deg);
+    }
+
+    30% {
+      transform: scale(1.1) rotateY(0deg);
+    }
+
+    50% {
+      transform: scale(1.15) rotateY(5deg);
+      box-shadow: 0 0 80px rgba(255, 215, 0, 0.8);
+    }
+
+    70% {
+      transform: scale(1.1) rotateY(-5deg);
+    }
+
+    100% {
+      transform: scale(0) rotateY(0deg);
+      opacity: 0;
+    }
+  }
+
+  /* 卡牌翻转动画 */
+  .animate-card-flip {
+    animation: cardFlip 0.6s ease-out forwards;
+    transform-style: preserve-3d;
+  }
+
+  @keyframes cardFlip {
+    0% {
+      transform: perspective(1000px) rotateY(0deg) scale(0.9);
+    }
+
+    50% {
+      transform: perspective(1000px) rotateY(90deg) scale(1);
+    }
+
+    100% {
+      transform: perspective(1000px) rotateY(180deg) scale(1);
+    }
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* 粒子动画 */
+  .animate-particle {
+    animation: particleBurst 1.5s ease-out forwards;
+  }
+
+  @keyframes particleBurst {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translate(calc((var(--random-x, 0.5) - 0.5) * 400px),
+          calc((var(--random-y, 0.5) - 0.5) * 400px)) scale(0);
+      opacity: 0;
+    }
+  }
+
+  /* 快速脉冲动画 */
+  .animate-pulse-fast {
+    animation: pulseFast 0.3s ease-in-out infinite;
+  }
+
+  @keyframes pulseFast {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.02);
+    }
+  }
+}
