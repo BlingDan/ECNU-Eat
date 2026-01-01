@@ -254,6 +254,11 @@ const PUTUO_RESTAURANTS: Restaurant[] = [
 // ============== 数据访问接口 ==============
 
 /**
+ * 所有餐厅列表
+ */
+export const restaurants: Restaurant[] = [...MINHANG_RESTAURANTS, ...PUTUO_RESTAURANTS];
+
+/**
  * 根据校区获取餐厅列表
  */
 export function getRestaurantsByCampus(campus: Campus): Restaurant[] {
