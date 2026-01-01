@@ -7,6 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase)](https://supabase.com/)
 
 ## ✨ 项目简介
 
@@ -41,11 +42,29 @@ cd ecnu-eat
 # 安装依赖
 npm install
 
+# 配置 Supabase（见下方说明）
+cp .env.example .env
+# 编辑 .env 文件填入 Supabase 凭据
+
 # 启动开发服务器
 npm run dev
 ```
 
 访问 http://localhost:3000
+
+### ⚙️ Supabase 配置
+
+1. 在 [supabase.com](https://supabase.com) 创建项目
+2. 在 **Settings → API** 获取 `Project URL` 和 `anon public key`
+3. 创建 `.env` 文件：
+
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+4. 在 **SQL Editor** 执行 `supabase/migrations/001_initial_schema.sql`
+5. 在 **Authentication → Providers → Email** 中可选关闭 `Confirm email`
 
 ### 局域网共享
 
@@ -90,8 +109,9 @@ npm run dev -- --host
 | TypeScript | 5.x | 类型安全 |
 | Vite | 7.x | 快速构建工具 |
 | Tailwind CSS | 3.x | 原子化 CSS 框架 |
+| Supabase | 2.x | 后端即服务 (BaaS) |
+| React Router | 7.x | 客户端路由 |
 | Web Audio API | - | 音效合成（无需外部音频文件） |
-| LocalStorage | - | 数据持久化 |
 
 ## 📁 项目结构
 
@@ -99,19 +119,28 @@ npm run dev -- --host
 ecnu-eat/
 ├── src/
 │   ├── components/          # React 组件
+│   │   ├── collection/      # 集邮册组件
 │   │   ├── decision/        # 决策组件（转盘、抽卡、老虎机）
-│   │   ├── layout/          # 布局组件
+│   │   ├── review/          # 评价组件
+│   │   ├── room/            # 多人房间组件
 │   │   └── ui/              # UI 组件
+│   ├── contexts/            # React Context (Auth, etc.)
 │   ├── data/                # 餐厅数据
 │   ├── hooks/               # 自定义 Hooks
+│   ├── lib/                 # 第三方库封装 (Supabase)
+│   ├── pages/               # 页面组件
 │   ├── types/               # TypeScript 类型定义
 │   ├── utils/               # 工具函数（音效等）
-│   ├── App.tsx              # 主应用
+│   ├── App.tsx              # 布局组件
+│   ├── router.tsx           # 路由配置
 │   ├── main.tsx             # 入口文件
 │   └── index.css            # 全局样式
+├── supabase/
+│   └── migrations/          # 数据库迁移脚本
 ├── public/                  # 静态资源
 ├── docs/                    # 文档
-├── index.html               # HTML 入口
+├── .env.example             # 环境变量模板
+├── index.html
 ├── package.json
 ├── tailwind.config.js
 ├── tsconfig.json
@@ -194,13 +223,14 @@ ecnu-eat/
 - [x] 游戏化音效系统
 - [x] 暗黑复古风格 UI
 
-### 🚧 Phase 2 (计划中)
+### ✅ Phase 2 (已完成)
 
-- [ ] 后端集成 (Supabase)
-- [ ] 共享房间功能
-- [ ] 多人协同决策
-- [ ] 美食集邮册
-- [ ] 用户评价系统
+- [x] 后端集成 (Supabase)
+- [x] 用户认证（邮箱+密码 / Magic Link）
+- [x] 共享房间功能
+- [] 多人协同决策
+- [x] 美食集邮册
+- [] 用户评价系统
 
 ### 💡 Future Ideas
 

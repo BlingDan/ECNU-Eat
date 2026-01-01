@@ -55,8 +55,14 @@ export function isSupabaseConfigured(): boolean {
 
 /**
  * 验证邮箱是否为 ECNU 学生邮箱
+ * 注意：测试模式下允许 root@test.com 绕过验证
  */
 export function isValidEcnuEmail(email: string): boolean {
+    // 测试用户白名单 - 正式上线前请移除
+    const testEmails = ['root@test.com'];
+    if (testEmails.includes(email.toLowerCase())) {
+        return true;
+    }
     return email.endsWith('@stu.ecnu.edu.cn');
 }
 
